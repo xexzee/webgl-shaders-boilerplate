@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<!-- vertex shader, handles positional data for every rendered vertex -->
+<!-- simple vertex shader, converts vertex data from the html canvas element's coordinate system to webgl's coordinate system -->
+<script id="vertex-shader" type="x-shader/x-vertex">
+    #ifdef GL_ES
+        precision highp float;
+    #endif
+
+    attribute vec2 canvasPosition;
+    uniform vec2 canvasDimensions;
+
+    void main() {
+        gl_Position = vec4((canvasPosition.x - canvasDimensions.x / 2.0) / (canvasDimensions.x / 2.0), (canvasPosition.y - canvasDimensions.y / 2.0) / (canvasDimensions.y / -2.0), 0.0, 1.0);
+    }
+</script>
+<!-- fragment shader, handles color data for every rendered pixel -->
+<!-- simple fragment shader, sets the color variable webgl is using to whatever color is passed in to the 'color' variable -->
+<script id="fragment-shader" type="x-shader/x-fragment">
+    void main() {
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+</script>
+<script src="script.js"></script>
+<body>
+    <canvas id="webgl-canvas" height="500" width="500"></canvas>
+</body>
